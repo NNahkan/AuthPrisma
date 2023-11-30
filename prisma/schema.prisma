@@ -2,22 +2,23 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+   provider = "sqlite"
+   url      = env("DATABASE_URL")
 }
 
 model User {
-  email String @id @unique
-  dogs  Dog[]
+   email        String @id @unique
+   dogs         Dog[]
+   passwordHash String
 }
 
 model Dog {
-  id        Int    @id @default(autoincrement())
-  name      String
-  userEmail String
-  user      User   @relation(fields: [userEmail], references: [email])
+   id        Int    @id @default(autoincrement())
+   name      String
+   userEmail String
+   user      User   @relation(fields: [userEmail], references: [email])
 }
